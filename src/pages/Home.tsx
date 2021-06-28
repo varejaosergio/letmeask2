@@ -10,10 +10,14 @@ import { Button } from '../components/Button'
 import '../styles/auth.scss'
 import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
+import { useTheme } from '../hooks/useTheme';
 
 export function Home() {
     const history = useHistory();
     const { user, signInWithGoogle } = useAuth();
+
+    const { theme, toogleTheme } = useTheme(); 
+
     const [roomCode, setRoomCode] = useState('');
 
     async function handleCreateRoom() {
@@ -48,7 +52,7 @@ export function Home() {
     }
 
     return (
-        <div id="page-auth">
+        <div id="page-auth" className={theme}>
             <aside>
                 <img src={illustrationImg} alt='illustration' />
                 <strong>Crie salas de Q&amp;A ao vivo</strong>
@@ -73,6 +77,7 @@ export function Home() {
                             Entrar na sala
                         </Button>
                     </form>
+                    <button onClick={ toogleTheme } className="toogle-theme"> Theme Light or Dark </button>
                 </div>
             </main>
         </div>
